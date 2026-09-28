@@ -5,7 +5,7 @@ export default class Start extends Phaser.Scene {
     preload() {
     }
     create() {
-        this.cameras.main.setBackgroundColor('#8f8f8f');
+        this.cameras.main.setBackgroundColor('#ffffff');
         const urlParams = new URLSearchParams(window.location.search);
         this.qualtricsParentOrigin = this.normalizeParentOrigin(urlParams.get('parentOrigin') || '');
         const gameId = urlParams.get('gameId');
@@ -442,24 +442,6 @@ export default class Start extends Phaser.Scene {
             'Person B': 0,
             'Person C': 0
         };
-        // Gray sky
-        this.addGameObject(this.add.rectangle(640, 120, 1280, 240, 12105912));
-        // Dry distant hills
-        this.addGameObject(this.add.ellipse(250, 285, 650, 220, 9406582));
-        this.addGameObject(this.add.ellipse(760, 285, 750, 240, 8353896));
-        this.addGameObject(this.add.ellipse(1120, 285, 520, 200, 9537397));
-        // Dry ground
-        this.addGameObject(this.add.rectangle(640, 470, 1280, 500, 9142640));
-        // Sparse dry grass
-        for (let i = 0; i < 35; i += 1) {
-            const grass = this.add.line(Phaser.Math.Between(0, 1280), Phaser.Math.Between(405, 690), 0, 0, Phaser.Math.Between(-5, 5), Phaser.Math.Between(-14, -6), 6248264);
-            grass.setLineWidth(2);
-            this.addGameObject(grass);
-        }
-        // Bare patches
-        for (let i = 0; i < 14; i += 1) {
-            this.addGameObject(this.add.ellipse(Phaser.Math.Between(30, 1250), Phaser.Math.Between(430, 680), Phaser.Math.Between(55, 120), Phaser.Math.Between(18, 38), 7300696));
-        }
         this.addGameObject(this.add.text(40, 60, 'Click each person, then click the tree to collect food for that person. Repeat until all three people have collected food. Select Next to continue.', {
             fontSize: '26px',
             color: '#000000',
@@ -635,32 +617,6 @@ export default class Start extends Phaser.Scene {
             fruit.setDepth(8);
             this.addGameObject(fruit);
         });
-        // Cracked ground
-        const cracks = [
-            [
-                1042,
-                484,
-                -8,
-                0
-            ],
-            [
-                1088,
-                498,
-                5,
-                12
-            ],
-            [
-                1135,
-                492,
-                -6,
-                10
-            ]
-        ];
-        cracks.forEach(crackData => {
-            const crack = this.add.line(crackData[0], crackData[1], 0, 0, crackData[2], crackData[3], 6182216);
-            crack.setLineWidth(2);
-            this.addGameObject(crack);
-        });
         const treeClickZone = this.add.zone(1085, 305, 340, 380);
         treeClickZone.setInteractive({ useHandCursor: true });
         treeClickZone.on('pointerdown', () => {
@@ -819,7 +775,7 @@ export default class Start extends Phaser.Scene {
         this.enterRecordedScreen('showDistributionDisplay');
         this.clearGameObjects();
         this.clearQuestionScreen();
-        this.cameras.main.setBackgroundColor('#8f8f8f');
+        this.cameras.main.setBackgroundColor('#ffffff');
         const fixedFood = this.getFixedFoodCounts();
         this.blanketFoodCount = 0;
         this.totalFoodToCount = fixedFood.total;
@@ -2133,65 +2089,6 @@ export default class Start extends Phaser.Scene {
         this.addQuestionObject(this.add.circle(x - 55, y, 58, 4037186));
         this.addQuestionObject(this.add.circle(x + 55, y, 58, 4037186));
         this.addQuestionObject(this.add.circle(x, y + 35, 64, 3116856));
-        const fruitPositions = [
-            [
-                -42,
-                -62
-            ],
-            [
-                -12,
-                -78
-            ],
-            [
-                18,
-                -70
-            ],
-            [
-                46,
-                -48
-            ],
-            [
-                -68,
-                -18
-            ],
-            [
-                -35,
-                -10
-            ],
-            [
-                -2,
-                -22
-            ],
-            [
-                32,
-                -8
-            ],
-            [
-                62,
-                6
-            ],
-            [
-                -52,
-                28
-            ],
-            [
-                -18,
-                36
-            ],
-            [
-                16,
-                32
-            ],
-            [
-                48,
-                42
-            ]
-        ];
-        fruitPositions.forEach(position => {
-            const fruit = this.add.circle(x + position[0], y + position[1], 6, 11674146);
-            fruit.setStrokeStyle(1, 0);
-            this.addQuestionObject(fruit);
-        });
     }
     showFloodPreparationQuestion() {
         this.enterRecordedScreen('showFloodPreparationQuestion');
