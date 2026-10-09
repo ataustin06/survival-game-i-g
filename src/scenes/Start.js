@@ -1431,10 +1431,9 @@ export default class Start extends Phaser.Scene {
             wordWrap: { width: 980 },
             lineSpacing: 6
         }).setOrigin(0.5));
-        this.addQuestionObject(this.add.text(640, 405, 'Choose one of these two options; your earlier arrangement is not an option.', {
-            fontSize: '22px',
-            fontStyle: 'bold',
-            color: '#222222',
+        this.addQuestionObject(this.add.text(640, 405, 'Choose only between these two options. No other arrangements are options.', {
+            fontSize: '18px',
+            color: '#555555',
             align: 'center',
             wordWrap: { width: 980 }
         }).setOrigin(0.5));
@@ -1653,10 +1652,9 @@ export default class Start extends Phaser.Scene {
             wordWrap: { width: 980 },
             lineSpacing: 8
         }).setOrigin(0.5, 0));
-        this.addQuestionObject(this.add.text(640, 410, 'Choose one of these two options; your earlier arrangement is not an option.', {
-            fontSize: '22px',
-            fontStyle: 'bold',
-            color: '#222222',
+        this.addQuestionObject(this.add.text(640, 410, 'Choose only between these two options. No other arrangements are options.', {
+            fontSize: '18px',
+            color: '#555555',
             align: 'center',
             wordWrap: { width: 980 }
         }).setOrigin(0.5));
@@ -1847,7 +1845,7 @@ export default class Start extends Phaser.Scene {
         this.enterRecordedScreen('showSocialContractQuestion');
         this.clearQuestionScreen();
         this.addQuestionObject(this.add.rectangle(640, 360, 1120, 500, 16777215)).setStrokeStyle(4, 0);
-        this.addQuestionObject(this.add.text(640, 235, 'Should the group agree to make sure everyone has enough food to survive, or not?', {
+        this.addQuestionObject(this.add.text(640, 235, 'Should the group guarantee that everyone will always have enough food to survive, or not?', {
             fontSize: '27px',
             color: '#000000',
             align: 'center',
@@ -1855,8 +1853,8 @@ export default class Start extends Phaser.Scene {
             lineSpacing: 6
         }).setOrigin(0.5));
         const answers = Phaser.Utils.Array.Shuffle([
-            'The group should agree to make sure everyone has enough food to survive.',
-            'The group should not agree to make sure everyone has enough food to survive.'
+            'The group should guarantee that everyone will always have enough food to survive.',
+            'The group should not guarantee that everyone will always have enough food to survive.'
         ]);
         this.createAnswerButton(640, 410, answers[0], 'socialContractGuarantee');
         this.createAnswerButton(640, 535, answers[1], 'socialContractGuarantee');
