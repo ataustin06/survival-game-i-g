@@ -22,7 +22,7 @@ export default class Start extends Phaser.Scene {
             gameId: gameId,
             qualtricsId: qualtricsId,
             condition: 'insufficiency',
-            gameVersion: 'insufficiency_english_gini_preferences_v4_recording',
+            gameVersion: 'insufficiency_english_gini_preferences_v5_focused',
             gameStartTime: new Date().toISOString(),
             gameEndTime: null,
             totalDurationMs: null,
@@ -1303,7 +1303,7 @@ export default class Start extends Phaser.Scene {
                     this.gameData.equalDivisionFinal.personA = this.equalDivisionCounts['Person A'];
                     this.gameData.equalDivisionFinal.personB = this.equalDivisionCounts['Person B'];
                     this.gameData.equalDivisionFinal.personC = this.equalDivisionCounts['Person C'];
-                    this.showPerCapitaQuestion();
+                    this.showGroupDistributionPreferenceQuestion();
                 });
             }
         });
@@ -1874,7 +1874,7 @@ export default class Start extends Phaser.Scene {
             cooperationCompetitionChoice: () => this.showCooperationCompetitionInstructionScreen()
         };
         const key = this.gameData.economicPrincipleOrder[index];
-        if (!key) { this.showSelfInterestRandomizationScreen(); return; }
+        if (!key) { this.showManipulationCheck(); return; }
         if (personDQuestions.includes(key) &&
             !personDQuestions.includes(this.gameData.economicPrincipleOrder[index - 1])) {
             this.showPersonDInstructionScreen(screens[key]);
@@ -2883,12 +2883,6 @@ export default class Start extends Phaser.Scene {
             };
             if (variableName === 'totalFoodEstimate') {
                 addNext(() => this.showFoodPolicyTransition('Task 1', 'First, choose how to arrange the food among the members of the group.', () => this.startSelfInterestAllocation('initial')));
-             } else if (variableName === 'equalDivisionOutcomeChoice') {
-                this.gameData.equalDivisionOutcomeChoice = Number.parseInt(label, 10);
-                this.gameData.equalDivisionOutcomePassed = this.gameData.equalDivisionOutcomeChoice === (this.gameData.condition === 'sufficiency' ? 3 : 0);
-                addNext(() => {
-                    this.showGroupDistributionPreferenceQuestion();
-                });
             } else if (variableName === 'groupDistributionPreference') {
                 addNext(() => this.completeRedistributionBlock('equal'));
             } else if (variableName === 'partialRedistributionPreference') {
@@ -2903,9 +2897,7 @@ export default class Start extends Phaser.Scene {
             } else if (variableName === 'redistributionFeasibility') {
                 addNext(() => this.showSocialContractQuestion());
             } else if (variableName === 'socialContractGuarantee') {
-                addNext(() => {
-                    this.showSurvivalRedistributionQuestion();
-                });
+                addNext(() => this.showEconomicPrinciple());
             } else if (this.gameData.economicPrincipleOrder?.includes(variableName)) {
                 addNext(() => this.showEconomicPrinciple(this.economicPrincipleIndex + 1));
             }
